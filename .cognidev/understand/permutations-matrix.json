@@ -1,0 +1,6359 @@
+{
+  "version": 2,
+  "generatedFrom": "datamodel.json",
+  "policy": {
+    "maxClassesPerField": 8,
+    "maxClassesPerRoutineField": 12,
+    "maxSampleRows": 24,
+    "maxSampleColumns": 8,
+    "maxRoutineColumns": 32,
+    "note": "A routine's cases carry EVERY input parameter — a vector missing an argument cannot be replayed against the signature; `complete` is false and `droppedInputs` non-zero on the rare signature wider than the cap. A table's matrix is narrowed for readability. A trap class is never dropped by a cap, nor by class dedup."
+  },
+  "evidence": {
+    "evaluated": true,
+    "sources": [
+      "dataflow"
+    ],
+    "divisors": 0,
+    "stringCompared": 0
+  },
+  "callables": [
+    {
+      "routine": "POST /api/customers",
+      "file": "internal/customers/handlers.go",
+      "line": 30,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "body.id",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "body.email",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "body.name",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "body.active",
+          "typeName": "bool",
+          "baseType": "bool",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "true",
+              "value": "true",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "false",
+              "value": "false",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "body.createdAt",
+          "typeName": "Time",
+          "baseType": "datetime",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "valid date",
+              "value": "2026-01-15T09:30:00Z",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "malformed date",
+              "value": "not-a-date",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.id",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.email",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.name",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.active",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "true",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.createdAt",
+              "kind": "valid",
+              "isNull": false,
+              "value": "2026-01-15T09:30:00Z",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-body-id",
+          "kind": "reject",
+          "label": "reject: body.id",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.id",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "body.email",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "body.name",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "body.active",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "body.createdAt",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.id",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.email",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.name",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.active",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "true",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.createdAt",
+              "kind": "valid",
+              "isNull": false,
+              "value": "2026-01-15T09:30:00Z",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-reject-body-createdat",
+          "kind": "reject",
+          "label": "reject: body.createdAt",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.id",
+              "kind": "valid",
+              "isNull": false,
+              "value": "1",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.email",
+              "kind": "valid",
+              "isNull": false,
+              "value": "text",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.name",
+              "kind": "valid",
+              "isNull": false,
+              "value": "text",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.active",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "false",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.createdAt",
+              "kind": "invalid",
+              "isNull": false,
+              "value": "not-a-date",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 243,
+      "trapCount": 0
+    },
+    {
+      "routine": "POST /api/products",
+      "file": "internal/catalog/handlers.go",
+      "line": 25,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "body.id",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "body.sku",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "body.name",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "body.price",
+          "typeName": "float64",
+          "baseType": "ref",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "body.categoryId",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.id",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.sku",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.name",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.categoryId",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-body-id",
+          "kind": "reject",
+          "label": "reject: body.id",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.id",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "body.sku",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "body.name",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "body.categoryId",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.id",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.sku",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.name",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.categoryId",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.id",
+              "kind": "valid",
+              "isNull": false,
+              "value": "1",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.sku",
+              "kind": "valid",
+              "isNull": false,
+              "value": "text",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.name",
+              "kind": "valid",
+              "isNull": false,
+              "value": "text",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "body.categoryId",
+              "kind": "valid",
+              "isNull": false,
+              "value": "1",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 162,
+      "trapCount": 0
+    },
+    {
+      "routine": "GET /api/customers/:id",
+      "file": "internal/customers/handlers.go",
+      "line": 16,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "id",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-id",
+          "kind": "reject",
+          "label": "reject: id",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "valid",
+              "isNull": false,
+              "value": "text",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 3,
+      "trapCount": 0
+    },
+    {
+      "routine": "POST /api/orders",
+      "file": "internal/orders/handlers.go",
+      "line": 18,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "body.customerId",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "body.items",
+          "typeName": "[]LineItem",
+          "baseType": "ref",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "empty list",
+              "value": "empty list",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "one item",
+              "value": "[…1]",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "many items",
+              "value": "[…N]",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.customerId",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-body-customerid",
+          "kind": "reject",
+          "label": "reject: body.customerId",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.customerId",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.customerId",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "body.customerId",
+              "kind": "valid",
+              "isNull": false,
+              "value": "1",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 9,
+      "trapCount": 0
+    },
+    {
+      "routine": "GET /api/orders/mine",
+      "file": "internal/orders/handlers.go",
+      "line": 33,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 1,
+      "trapCount": 0
+    },
+    {
+      "routine": "GET /api/products",
+      "file": "internal/catalog/handlers.go",
+      "line": 16,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 1,
+      "trapCount": 0
+    },
+    {
+      "routine": "Gateway.Charge",
+      "file": "internal/payments/gateway.go",
+      "line": 23,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "orderID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "amount",
+          "typeName": "float64",
+          "baseType": "float",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "zero",
+              "value": "0.00",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "typical amount",
+              "value": "100.00",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "negative",
+              "value": "-0.01",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "orderID",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "amount",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0.00",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-orderid",
+          "kind": "reject",
+          "label": "reject: orderID",
+          "trap": null,
+          "values": [
+            {
+              "field": "orderID",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "amount",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "orderID",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "amount",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0.00",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "orderID",
+              "kind": "valid",
+              "isNull": false,
+              "value": "1",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "amount",
+              "kind": "valid",
+              "isNull": false,
+              "value": "100.00",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "005-reject-orderid",
+          "kind": "reject",
+          "label": "reject: orderID",
+          "trap": null,
+          "values": [
+            {
+              "field": "orderID",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "amount",
+              "kind": "invalid",
+              "isNull": false,
+              "value": "-0.01",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 12,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.Charge",
+      "file": "internal/payments/service.go",
+      "line": 15,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "tx",
+          "typeName": "*gorm.DB",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "orderID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "amount",
+          "typeName": "float64",
+          "baseType": "float",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "zero",
+              "value": "0.00",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "typical amount",
+              "value": "100.00",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "negative",
+              "value": "-0.01",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "orderID",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "amount",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0.00",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-orderid",
+          "kind": "reject",
+          "label": "reject: orderID",
+          "trap": null,
+          "values": [
+            {
+              "field": "orderID",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "amount",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "orderID",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "amount",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0.00",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "orderID",
+              "kind": "valid",
+              "isNull": false,
+              "value": "1",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "amount",
+              "kind": "valid",
+              "isNull": false,
+              "value": "100.00",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "005-reject-orderid",
+          "kind": "reject",
+          "label": "reject: orderID",
+          "trap": null,
+          "values": [
+            {
+              "field": "orderID",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "amount",
+              "kind": "invalid",
+              "isNull": false,
+              "value": "-0.01",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 24,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.Reserve",
+      "file": "internal/inventory/service.go",
+      "line": 18,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "tx",
+          "typeName": "*gorm.DB",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "productID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "qty",
+          "typeName": "int",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "productID",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "qty",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-productid",
+          "kind": "reject",
+          "label": "reject: productID",
+          "trap": null,
+          "values": [
+            {
+              "field": "productID",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            },
+            {
+              "field": "qty",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "productID",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "qty",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "productID",
+              "kind": "valid",
+              "isNull": false,
+              "value": "1",
+              "valid": true,
+              "trap": null
+            },
+            {
+              "field": "qty",
+              "kind": "valid",
+              "isNull": false,
+              "value": "1",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 18,
+      "trapCount": 0
+    },
+    {
+      "routine": "Bus.Publish",
+      "file": "internal/platform/bus.go",
+      "line": 26,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "topic",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "payload",
+          "typeName": "any",
+          "baseType": "ref",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "topic",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-topic",
+          "kind": "reject",
+          "label": "reject: topic",
+          "trap": null,
+          "values": [
+            {
+              "field": "topic",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "topic",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "topic",
+              "kind": "valid",
+              "isNull": false,
+              "value": "text",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 6,
+      "trapCount": 0
+    },
+    {
+      "routine": "Bus.Subscribe",
+      "file": "internal/platform/bus.go",
+      "line": 19,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "topic",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "h",
+          "typeName": "Handler",
+          "baseType": "ref",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "topic",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-topic",
+          "kind": "reject",
+          "label": "reject: topic",
+          "trap": null,
+          "values": [
+            {
+              "field": "topic",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "topic",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "topic",
+              "kind": "valid",
+              "isNull": false,
+              "value": "text",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 6,
+      "trapCount": 0
+    },
+    {
+      "routine": "NewGateway",
+      "file": "internal/payments/gateway.go",
+      "line": 18,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "baseURL",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "baseURL",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-baseurl",
+          "kind": "reject",
+          "label": "reject: baseURL",
+          "trap": null,
+          "values": [
+            {
+              "field": "baseURL",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "baseURL",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "baseURL",
+              "kind": "valid",
+              "isNull": false,
+              "value": "text",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 3,
+      "trapCount": 0
+    },
+    {
+      "routine": "Open",
+      "file": "internal/platform/db.go",
+      "line": 15,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "dsn",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "dsn",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-dsn",
+          "kind": "reject",
+          "label": "reject: dsn",
+          "trap": null,
+          "values": [
+            {
+              "field": "dsn",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "dsn",
+              "kind": "empty",
+              "isNull": false,
+              "value": "",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "dsn",
+              "kind": "valid",
+              "isNull": false,
+              "value": "text",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 3,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.ForCustomer",
+      "file": "internal/orders/service.go",
+      "line": 78,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "customerID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "customerID",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-customerid",
+          "kind": "reject",
+          "label": "reject: customerID",
+          "trap": null,
+          "values": [
+            {
+              "field": "customerID",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "customerID",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "customerID",
+              "kind": "valid",
+              "isNull": false,
+              "value": "1",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 3,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.Get",
+      "file": "internal/customers/service.go",
+      "line": 12,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "id",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "valid id",
+              "value": "existing key",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "id not found",
+              "value": "key with no row",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "valid",
+              "isNull": false,
+              "value": "existing key",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-id",
+          "kind": "reject",
+          "label": "reject: id",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "valid",
+              "isNull": false,
+              "value": "existing key",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-reject-id",
+          "kind": "reject",
+          "label": "reject: id",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "invalid",
+              "isNull": false,
+              "value": "key with no row",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 3,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.IsActive",
+      "file": "internal/customers/service.go",
+      "line": 24,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "id",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "valid id",
+              "value": "existing key",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "id not found",
+              "value": "key with no row",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "valid",
+              "isNull": false,
+              "value": "existing key",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-id",
+          "kind": "reject",
+          "label": "reject: id",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "valid",
+              "isNull": false,
+              "value": "existing key",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-reject-id",
+          "kind": "reject",
+          "label": "reject: id",
+          "trap": null,
+          "values": [
+            {
+              "field": "id",
+              "kind": "invalid",
+              "isNull": false,
+              "value": "key with no row",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 3,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.PriceOf",
+      "file": "internal/catalog/service.go",
+      "line": 38,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "productID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [
+        {
+          "id": "001-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "productID",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "002-reject-productid",
+          "kind": "reject",
+          "label": "reject: productID",
+          "trap": null,
+          "values": [
+            {
+              "field": "productID",
+              "kind": "invalid",
+              "isNull": true,
+              "value": "null",
+              "valid": false,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "003-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "productID",
+              "kind": "boundary",
+              "isNull": false,
+              "value": "0",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        },
+        {
+          "id": "004-valid",
+          "kind": "valid",
+          "label": "valid",
+          "trap": null,
+          "values": [
+            {
+              "field": "productID",
+              "kind": "valid",
+              "isNull": false,
+              "value": "1",
+              "valid": true,
+              "trap": null
+            }
+          ]
+        }
+      ],
+      "totalCombinations": 3,
+      "trapCount": 0
+    },
+    {
+      "routine": "AuthMiddleware",
+      "file": "internal/platform/auth.go",
+      "line": 17,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 1,
+      "trapCount": 0
+    },
+    {
+      "routine": "NewBus",
+      "file": "internal/platform/bus.go",
+      "line": 16,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 1,
+      "trapCount": 0
+    },
+    {
+      "routine": "NewService",
+      "file": "internal/catalog/service.go",
+      "line": 20,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "db",
+          "typeName": "*gorm.DB",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 2,
+      "trapCount": 0
+    },
+    {
+      "routine": "NewService",
+      "file": "internal/customers/service.go",
+      "line": 9,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "db",
+          "typeName": "*gorm.DB",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 2,
+      "trapCount": 0
+    },
+    {
+      "routine": "NewService",
+      "file": "internal/inventory/service.go",
+      "line": 15,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "db",
+          "typeName": "*gorm.DB",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 2,
+      "trapCount": 0
+    },
+    {
+      "routine": "NewService",
+      "file": "internal/orders/service.go",
+      "line": 29,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "db",
+          "typeName": "*gorm.DB",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "c",
+          "typeName": "*catalog.Service",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "cu",
+          "typeName": "*customers.Service",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "i",
+          "typeName": "*inventory.Service",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "p",
+          "typeName": "*payments.Service",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "bus",
+          "typeName": "*platform.Bus",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 64,
+      "trapCount": 0
+    },
+    {
+      "routine": "NewService",
+      "file": "internal/payments/service.go",
+      "line": 12,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "db",
+          "typeName": "*gorm.DB",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "gw",
+          "typeName": "*Gateway",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 4,
+      "trapCount": 0
+    },
+    {
+      "routine": "Register",
+      "file": "internal/platform/db.go",
+      "line": 12,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 1,
+      "trapCount": 0
+    },
+    {
+      "routine": "RegisterRoutes",
+      "file": "internal/catalog/handlers.go",
+      "line": 11,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "r",
+          "typeName": "*gin.RouterGroup",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "svc",
+          "typeName": "*Service",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 4,
+      "trapCount": 0
+    },
+    {
+      "routine": "RegisterRoutes",
+      "file": "internal/customers/handlers.go",
+      "line": 11,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "r",
+          "typeName": "*gin.RouterGroup",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "svc",
+          "typeName": "*Service",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 4,
+      "trapCount": 0
+    },
+    {
+      "routine": "RegisterRoutes",
+      "file": "internal/orders/handlers.go",
+      "line": 13,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "r",
+          "typeName": "*gin.RouterGroup",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "svc",
+          "typeName": "*Service",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 4,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.Create",
+      "file": "internal/catalog/service.go",
+      "line": 30,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "p",
+          "typeName": "*Product",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 2,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.List",
+      "file": "internal/catalog/service.go",
+      "line": 23,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 1,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.OnOrderPlaced",
+      "file": "internal/inventory/service.go",
+      "line": 31,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "payload",
+          "typeName": "any",
+          "baseType": "ref",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 2,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.PlaceOrder",
+      "file": "internal/orders/service.go",
+      "line": 36,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "req",
+          "typeName": "PlaceOrderRequest",
+          "baseType": "ref",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 2,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.Register",
+      "file": "internal/customers/service.go",
+      "line": 21,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "c",
+          "typeName": "*Customer",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 2,
+      "trapCount": 0
+    },
+    {
+      "routine": "Service.Restock",
+      "file": "internal/inventory/service.go",
+      "line": 36,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 1,
+      "trapCount": 0
+    },
+    {
+      "routine": "StartRestockJob",
+      "file": "internal/inventory/service.go",
+      "line": 42,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "ctx",
+          "typeName": "context.Context",
+          "baseType": "ref",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "s",
+          "typeName": "*Service",
+          "baseType": "ref",
+          "nullable": true,
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 4,
+      "trapCount": 0
+    },
+    {
+      "routine": "StockItem.TableName",
+      "file": "internal/inventory/model.go",
+      "line": 14,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 1,
+      "trapCount": 0
+    },
+    {
+      "routine": "UserID",
+      "file": "internal/platform/auth.go",
+      "line": 32,
+      "dialect": null,
+      "complete": true,
+      "droppedInputs": 0,
+      "inputs": [
+        {
+          "name": "ctx",
+          "typeName": "context.Context",
+          "baseType": "ref",
+          "nullable": false,
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "cases": [],
+      "totalCombinations": 2,
+      "trapCount": 0
+    }
+  ],
+  "entities": [
+    {
+      "name": "Customer",
+      "file": "internal/customers/model.go",
+      "line": 10,
+      "kind": "table",
+      "dialect": null,
+      "inputs": [
+        {
+          "name": "ID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 11,
+          "role": "identifier",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "valid id",
+              "value": "existing key",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "id not found",
+              "value": "key with no row",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Email",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null",
+            "email"
+          ],
+          "line": 12,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "well-formed",
+              "value": "user@example.com",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "invalid format",
+              "value": "not-an-email",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Name",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 13,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Active",
+          "typeName": "bool",
+          "baseType": "bool",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 14,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "true",
+              "value": "true",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "false",
+              "value": "false",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "CreatedAt",
+          "typeName": "time.Time",
+          "baseType": "datetime",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 15,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "valid date",
+              "value": "2026-01-15T09:30:00Z",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "malformed date",
+              "value": "not-a-date",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "columns": [
+        "ID",
+        "Email",
+        "Name",
+        "Active",
+        "CreatedAt"
+      ],
+      "vectors": [
+        {
+          "index": 1,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Email",
+              "label": "well-formed",
+              "value": "user@example.com",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Name",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Active",
+              "label": "true",
+              "value": "true",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "CreatedAt",
+              "label": "valid date",
+              "value": "2026-01-15T09:30:00Z",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 2,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Email",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Name",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Active",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "CreatedAt",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        },
+        {
+          "index": 3,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Email",
+              "label": "well-formed",
+              "value": "user@example.com",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Name",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Active",
+              "label": "true",
+              "value": "true",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "CreatedAt",
+              "label": "valid date",
+              "value": "2026-01-15T09:30:00Z",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 4,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "id not found",
+              "value": "key with no row",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            },
+            {
+              "field": "Email",
+              "label": "invalid format",
+              "value": "not-an-email",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            },
+            {
+              "field": "Name",
+              "label": "\"text\"",
+              "value": "text",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Active",
+              "label": "false",
+              "value": "false",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "CreatedAt",
+              "label": "malformed date",
+              "value": "not-a-date",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        }
+      ],
+      "totalCombinations": 243,
+      "trapCount": 0,
+      "complete": true,
+      "droppedInputs": 0,
+      "coverage": "4 of 243 combinations · every value class covered ≥1×"
+    },
+    {
+      "name": "OrderLine",
+      "file": "internal/orders/model.go",
+      "line": 15,
+      "kind": "table",
+      "dialect": null,
+      "inputs": [
+        {
+          "name": "ID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 16,
+          "role": "identifier",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "valid id",
+              "value": "existing key",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "id not found",
+              "value": "key with no row",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "OrderID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 17,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "ProductID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 18,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Quantity",
+          "typeName": "int",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 19,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "UnitPrice",
+          "typeName": "float64",
+          "baseType": "float",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 20,
+          "role": "money",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "zero",
+              "value": "0.00",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "typical amount",
+              "value": "100.00",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "negative",
+              "value": "-0.01",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "columns": [
+        "ID",
+        "OrderID",
+        "ProductID",
+        "Quantity",
+        "UnitPrice"
+      ],
+      "vectors": [
+        {
+          "index": 1,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "OrderID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "ProductID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Quantity",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "UnitPrice",
+              "label": "zero",
+              "value": "0.00",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 2,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "OrderID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "ProductID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Quantity",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "UnitPrice",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        },
+        {
+          "index": 3,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "OrderID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "ProductID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Quantity",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "UnitPrice",
+              "label": "zero",
+              "value": "0.00",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 4,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "id not found",
+              "value": "key with no row",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            },
+            {
+              "field": "OrderID",
+              "label": "1",
+              "value": "1",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "ProductID",
+              "label": "1",
+              "value": "1",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Quantity",
+              "label": "1",
+              "value": "1",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "UnitPrice",
+              "label": "typical amount",
+              "value": "100.00",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        },
+        {
+          "index": 5,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "OrderID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "ProductID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Quantity",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "UnitPrice",
+              "label": "negative",
+              "value": "-0.01",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        }
+      ],
+      "totalCombinations": 324,
+      "trapCount": 0,
+      "complete": true,
+      "droppedInputs": 0,
+      "coverage": "5 of 324 combinations · every value class covered ≥1×"
+    },
+    {
+      "name": "Product",
+      "file": "internal/catalog/model.go",
+      "line": 13,
+      "kind": "table",
+      "dialect": null,
+      "inputs": [
+        {
+          "name": "ID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 14,
+          "role": "identifier",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "valid id",
+              "value": "existing key",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "id not found",
+              "value": "key with no row",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "SKU",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 15,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Name",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 16,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Price",
+          "typeName": "float64",
+          "baseType": "float",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null",
+            "≥0"
+          ],
+          "line": 17,
+          "role": "money",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0.0",
+              "value": "0.0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "below min (-0.01)",
+              "value": "-0.01",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "CategoryID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 18,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Category",
+          "typeName": "Category",
+          "baseType": "ref",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 19,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "columns": [
+        "ID",
+        "SKU",
+        "Name",
+        "Price",
+        "CategoryID"
+      ],
+      "vectors": [
+        {
+          "index": 1,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "SKU",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Name",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Price",
+              "label": "0.0",
+              "value": "0.0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "CategoryID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 2,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "SKU",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Name",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Price",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "CategoryID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        },
+        {
+          "index": 3,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "SKU",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Name",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Price",
+              "label": "0.0",
+              "value": "0.0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "CategoryID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 4,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "id not found",
+              "value": "key with no row",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            },
+            {
+              "field": "SKU",
+              "label": "\"text\"",
+              "value": "text",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Name",
+              "label": "\"text\"",
+              "value": "text",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Price",
+              "label": "below min (-0.01)",
+              "value": "-0.01",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            },
+            {
+              "field": "CategoryID",
+              "label": "1",
+              "value": "1",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        }
+      ],
+      "totalCombinations": 486,
+      "trapCount": 0,
+      "complete": true,
+      "droppedInputs": 0,
+      "coverage": "4 of 486 combinations · every value class covered ≥1×"
+    },
+    {
+      "name": "Order",
+      "file": "internal/orders/model.go",
+      "line": 6,
+      "kind": "table",
+      "dialect": null,
+      "inputs": [
+        {
+          "name": "ID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 7,
+          "role": "identifier",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "valid id",
+              "value": "existing key",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "id not found",
+              "value": "key with no row",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "CustomerID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 8,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Status",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 9,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Total",
+          "typeName": "float64",
+          "baseType": "float",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 10,
+          "role": "money",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "zero",
+              "value": "0.00",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "typical amount",
+              "value": "100.00",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "negative",
+              "value": "-0.01",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Lines",
+          "typeName": "[]OrderLine",
+          "baseType": "ref",
+          "nullable": true,
+          "collection": true,
+          "chips": [
+            "list",
+            "nullable"
+          ],
+          "line": 11,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "empty list",
+              "value": "empty list",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "one item",
+              "value": "[…1]",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "many items",
+              "value": "[…N]",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "columns": [
+        "ID",
+        "CustomerID",
+        "Status",
+        "Total"
+      ],
+      "vectors": [
+        {
+          "index": 1,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "CustomerID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Status",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Total",
+              "label": "zero",
+              "value": "0.00",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 2,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "CustomerID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Status",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Total",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        },
+        {
+          "index": 3,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "CustomerID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Status",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Total",
+              "label": "zero",
+              "value": "0.00",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 4,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "id not found",
+              "value": "key with no row",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            },
+            {
+              "field": "CustomerID",
+              "label": "1",
+              "value": "1",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Status",
+              "label": "\"text\"",
+              "value": "text",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Total",
+              "label": "typical amount",
+              "value": "100.00",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        },
+        {
+          "index": 5,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "CustomerID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Status",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Total",
+              "label": "negative",
+              "value": "-0.01",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        }
+      ],
+      "totalCombinations": 432,
+      "trapCount": 0,
+      "complete": true,
+      "droppedInputs": 0,
+      "coverage": "5 of 432 combinations · every value class covered ≥1×"
+    },
+    {
+      "name": "Payment",
+      "file": "internal/payments/model.go",
+      "line": 6,
+      "kind": "table",
+      "dialect": null,
+      "inputs": [
+        {
+          "name": "ID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 7,
+          "role": "identifier",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "valid id",
+              "value": "existing key",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "id not found",
+              "value": "key with no row",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "OrderID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 8,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Amount",
+          "typeName": "float64",
+          "baseType": "float",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 9,
+          "role": "money",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "zero",
+              "value": "0.00",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "typical amount",
+              "value": "100.00",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "negative",
+              "value": "-0.01",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Status",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 10,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "columns": [
+        "ID",
+        "OrderID",
+        "Amount",
+        "Status"
+      ],
+      "vectors": [
+        {
+          "index": 1,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "OrderID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Amount",
+              "label": "zero",
+              "value": "0.00",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Status",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 2,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "OrderID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Amount",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Status",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        },
+        {
+          "index": 3,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "OrderID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Amount",
+              "label": "zero",
+              "value": "0.00",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Status",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 4,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "id not found",
+              "value": "key with no row",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            },
+            {
+              "field": "OrderID",
+              "label": "1",
+              "value": "1",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Amount",
+              "label": "typical amount",
+              "value": "100.00",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Status",
+              "label": "\"text\"",
+              "value": "text",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        },
+        {
+          "index": 5,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "OrderID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Amount",
+              "label": "negative",
+              "value": "-0.01",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            },
+            {
+              "field": "Status",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        }
+      ],
+      "totalCombinations": 108,
+      "trapCount": 0,
+      "complete": true,
+      "droppedInputs": 0,
+      "coverage": "5 of 108 combinations · every value class covered ≥1×"
+    },
+    {
+      "name": "StockItem",
+      "file": "internal/inventory/model.go",
+      "line": 6,
+      "kind": "table",
+      "dialect": null,
+      "inputs": [
+        {
+          "name": "ID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 7,
+          "role": "identifier",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "valid id",
+              "value": "existing key",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "id not found",
+              "value": "key with no row",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "ProductID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 8,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "OnHand",
+          "typeName": "int",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 9,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Reserved",
+          "typeName": "int",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 10,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "columns": [
+        "ID",
+        "ProductID",
+        "OnHand",
+        "Reserved"
+      ],
+      "vectors": [
+        {
+          "index": 1,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "ProductID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "OnHand",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Reserved",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 2,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "ProductID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "OnHand",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Reserved",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        },
+        {
+          "index": 3,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "ProductID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "OnHand",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Reserved",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 4,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "id not found",
+              "value": "key with no row",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            },
+            {
+              "field": "ProductID",
+              "label": "1",
+              "value": "1",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "OnHand",
+              "label": "1",
+              "value": "1",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Reserved",
+              "label": "1",
+              "value": "1",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        }
+      ],
+      "totalCombinations": 81,
+      "trapCount": 0,
+      "complete": true,
+      "droppedInputs": 0,
+      "coverage": "4 of 81 combinations · every value class covered ≥1×"
+    },
+    {
+      "name": "Category",
+      "file": "internal/catalog/model.go",
+      "line": 6,
+      "kind": "table",
+      "dialect": null,
+      "inputs": [
+        {
+          "name": "ID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 7,
+          "role": "identifier",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "valid id",
+              "value": "existing key",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "id not found",
+              "value": "key with no row",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Name",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 8,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Products",
+          "typeName": "[]Product",
+          "baseType": "ref",
+          "nullable": true,
+          "collection": true,
+          "chips": [
+            "list",
+            "nullable"
+          ],
+          "line": 9,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "empty list",
+              "value": "empty list",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "one item",
+              "value": "[…1]",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "many items",
+              "value": "[…N]",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "columns": [
+        "ID",
+        "Name"
+      ],
+      "vectors": [
+        {
+          "index": 1,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Name",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 2,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Name",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        },
+        {
+          "index": 3,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "valid id",
+              "value": "existing key",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Name",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 4,
+          "cells": [
+            {
+              "field": "ID",
+              "label": "id not found",
+              "value": "key with no row",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            },
+            {
+              "field": "Name",
+              "label": "\"text\"",
+              "value": "text",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ID"
+        }
+      ],
+      "totalCombinations": 36,
+      "trapCount": 0,
+      "complete": true,
+      "droppedInputs": 0,
+      "coverage": "4 of 36 combinations · every value class covered ≥1×"
+    },
+    {
+      "name": "LineItem",
+      "file": "internal/orders/model.go",
+      "line": 30,
+      "kind": "object",
+      "dialect": null,
+      "inputs": [
+        {
+          "name": "ProductID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 31,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Quantity",
+          "typeName": "int",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null",
+            "≥0"
+          ],
+          "line": 32,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "below min (-1)",
+              "value": "-1",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "columns": [
+        "ProductID",
+        "Quantity"
+      ],
+      "vectors": [
+        {
+          "index": 1,
+          "cells": [
+            {
+              "field": "ProductID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Quantity",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 2,
+          "cells": [
+            {
+              "field": "ProductID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            },
+            {
+              "field": "Quantity",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: ProductID"
+        },
+        {
+          "index": 3,
+          "cells": [
+            {
+              "field": "ProductID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Quantity",
+              "label": "below min (-1)",
+              "value": "-1",
+              "kind": "invalid",
+              "isNull": false,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: Quantity"
+        },
+        {
+          "index": 4,
+          "cells": [
+            {
+              "field": "ProductID",
+              "label": "1",
+              "value": "1",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            },
+            {
+              "field": "Quantity",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        }
+      ],
+      "totalCombinations": 9,
+      "trapCount": 0,
+      "complete": true,
+      "droppedInputs": 0,
+      "coverage": "4 of 9 combinations · every value class covered ≥1×"
+    },
+    {
+      "name": "Gateway",
+      "file": "internal/payments/gateway.go",
+      "line": 12,
+      "kind": "object",
+      "dialect": null,
+      "inputs": [
+        {
+          "name": "baseURL",
+          "typeName": "string",
+          "baseType": "string",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 13,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "\"\"",
+              "value": "",
+              "valid": true,
+              "kind": "empty",
+              "isNull": false
+            },
+            {
+              "label": "\"text\"",
+              "value": "text",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "client",
+          "typeName": "*http.Client",
+          "baseType": "ref",
+          "nullable": true,
+          "collection": false,
+          "chips": [
+            "nullable"
+          ],
+          "line": 14,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL",
+              "value": "null",
+              "valid": true,
+              "kind": "null",
+              "isNull": true
+            },
+            {
+              "label": "nested object",
+              "value": "{…}",
+              "valid": true,
+              "kind": "ref",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "columns": [
+        "baseURL"
+      ],
+      "vectors": [
+        {
+          "index": 1,
+          "cells": [
+            {
+              "field": "baseURL",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 2,
+          "cells": [
+            {
+              "field": "baseURL",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: baseURL"
+        },
+        {
+          "index": 3,
+          "cells": [
+            {
+              "field": "baseURL",
+              "label": "\"\"",
+              "value": "",
+              "kind": "empty",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 4,
+          "cells": [
+            {
+              "field": "baseURL",
+              "label": "\"text\"",
+              "value": "text",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        }
+      ],
+      "totalCombinations": 6,
+      "trapCount": 0,
+      "complete": true,
+      "droppedInputs": 0,
+      "coverage": "4 of 6 combinations · every value class covered ≥1×"
+    },
+    {
+      "name": "PlaceOrderRequest",
+      "file": "internal/orders/model.go",
+      "line": 24,
+      "kind": "object",
+      "dialect": null,
+      "inputs": [
+        {
+          "name": "CustomerID",
+          "typeName": "uint",
+          "baseType": "int",
+          "nullable": false,
+          "collection": false,
+          "chips": [
+            "!null"
+          ],
+          "line": 25,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "NULL (rejected)",
+              "value": "null",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": true
+            },
+            {
+              "label": "0",
+              "value": "0",
+              "valid": true,
+              "kind": "boundary",
+              "isNull": false
+            },
+            {
+              "label": "1",
+              "value": "1",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        },
+        {
+          "name": "Items",
+          "typeName": "[]LineItem",
+          "baseType": "ref",
+          "nullable": false,
+          "collection": true,
+          "chips": [
+            "list",
+            "!null",
+            "≥1"
+          ],
+          "line": 26,
+          "role": "plain",
+          "classes": [
+            {
+              "label": "empty list (rejected)",
+              "value": "empty list",
+              "valid": false,
+              "kind": "invalid",
+              "isNull": false
+            },
+            {
+              "label": "one item",
+              "value": "[…1]",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            },
+            {
+              "label": "many items",
+              "value": "[…N]",
+              "valid": true,
+              "kind": "valid",
+              "isNull": false
+            }
+          ]
+        }
+      ],
+      "columns": [
+        "CustomerID"
+      ],
+      "vectors": [
+        {
+          "index": 1,
+          "cells": [
+            {
+              "field": "CustomerID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 2,
+          "cells": [
+            {
+              "field": "CustomerID",
+              "label": "NULL (rejected)",
+              "value": "null",
+              "kind": "invalid",
+              "isNull": true,
+              "valid": false
+            }
+          ],
+          "valid": false,
+          "kind": "reject",
+          "label": "reject: CustomerID"
+        },
+        {
+          "index": 3,
+          "cells": [
+            {
+              "field": "CustomerID",
+              "label": "0",
+              "value": "0",
+              "kind": "boundary",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        },
+        {
+          "index": 4,
+          "cells": [
+            {
+              "field": "CustomerID",
+              "label": "1",
+              "value": "1",
+              "kind": "valid",
+              "isNull": false,
+              "valid": true
+            }
+          ],
+          "valid": true,
+          "kind": "valid",
+          "label": "valid"
+        }
+      ],
+      "totalCombinations": 9,
+      "trapCount": 0,
+      "complete": true,
+      "droppedInputs": 0,
+      "coverage": "4 of 9 combinations · every value class covered ≥1×"
+    }
+  ],
+  "traps": []
+}

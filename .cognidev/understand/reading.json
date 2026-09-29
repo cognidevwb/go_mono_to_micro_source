@@ -1,0 +1,453 @@
+{
+ "version": 1,
+ "prompt_version": 1,
+ "generated_from_merkle": "191424716611929f67cc1862dda5ca22ac6dd8a1bc5675ac08334d4c0b03fce6",
+ "chapters": [
+  {
+   "id": "orientation",
+   "label": "Get oriented",
+   "steps": [
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "id": "entry",
+   "label": "Where execution starts",
+   "steps": [
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "id": "data",
+   "label": "The data model",
+   "steps": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+   ]
+  },
+  {
+   "id": "logic",
+   "label": "The core logic",
+   "steps": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "id": "api",
+   "label": "The API surface",
+   "steps": [
+    20,
+    21,
+    22
+   ]
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "path": "README.md",
+   "chapter": "orientation",
+   "role": "config",
+   "one_liner": "The project's own introduction \u2014 what it is and how to run it.",
+   "teaches": [
+    "what the project does",
+    "how to run it locally"
+   ],
+   "why_now": "Always start with what the authors wanted you to know.",
+   "depends_on": [],
+   "imported_by": 0,
+   "loc": 0
+  },
+  {
+   "n": 2,
+   "path": "README.md",
+   "chapter": "orientation",
+   "role": "config",
+   "one_liner": "README describing the Go gin+gorm monolith fixture's structure, seams, and intentional coupling for modernization exercises",
+   "teaches": [
+    "bounded-context package layout",
+    "shared DB and hidden coupling seams",
+    "saga transaction pattern",
+    "deliberate legacy code smells"
+   ],
+   "why_now": "Read this first \u2014 it sets the project's ground rules before any code.",
+   "depends_on": [],
+   "imported_by": 0,
+   "loc": 28
+  },
+  {
+   "n": 3,
+   "path": "go.mod",
+   "chapter": "orientation",
+   "role": "config",
+   "one_liner": "Go module definition declaring the shop monolith's package name, Go version, and dependencies (Gin, GORM, Postgres driver).",
+   "teaches": [
+    "module path/import root for the project",
+    "direct vs indirect dependency declarations",
+    "tech stack: Gin web framework + GORM ORM + Postgres"
+   ],
+   "why_now": "Read this first \u2014 it sets the project's ground rules before any code.",
+   "depends_on": [],
+   "imported_by": 0,
+   "loc": 48
+  },
+  {
+   "n": 4,
+   "path": "go.sum",
+   "chapter": "orientation",
+   "role": "config",
+   "one_liner": "Go module dependency lock file recording exact versions and checksums for third-party packages",
+   "teaches": [
+    "dependency versions used (Gin, GORM, pgx, sqlite driver)",
+    "checksum-based module verification"
+   ],
+   "why_now": "Read this first \u2014 it sets the project's ground rules before any code.",
+   "depends_on": [],
+   "imported_by": 0,
+   "loc": 112
+  },
+  {
+   "n": 5,
+   "path": "internal/platform/auth.go",
+   "chapter": "entry",
+   "role": "wiring",
+   "one_liner": "Gin middleware that authenticates requests via an X-User-ID header and exposes the user id through request context.",
+   "teaches": [
+    "context-based auth propagation",
+    "gin middleware pattern",
+    "header-based auth (no real token validation)"
+   ],
+   "why_now": "A load-bearing file \u2014 2 files import it.",
+   "depends_on": [],
+   "imported_by": 2,
+   "loc": 35
+  },
+  {
+   "n": 6,
+   "path": "internal/platform/bus.go",
+   "chapter": "entry",
+   "role": "wiring",
+   "one_liner": "In-process synchronous pub/sub event bus used to decouple modules within the monolith.",
+   "teaches": [
+    "topic-based publish/subscribe",
+    "in-memory handler registration with a mutex",
+    "synchronous event delivery pattern",
+    "hidden coupling that would become network calls after a service split"
+   ],
+   "why_now": "A load-bearing file \u2014 3 files import it.",
+   "depends_on": [],
+   "imported_by": 3,
+   "loc": 32
+  },
+  {
+   "n": 7,
+   "path": "cmd/shop/main.go",
+   "chapter": "entry",
+   "role": "entry",
+   "one_liner": "Process entry point that wires up DB, services, event bus, background job, and HTTP routes for the shop monolith.",
+   "teaches": [
+    "service construction and dependency wiring order",
+    "pub/sub event subscription via internal bus",
+    "gin router setup with auth middleware and route groups",
+    "starting a background job alongside the HTTP server"
+   ],
+   "why_now": "Execution starts here. Everything else hangs off this file.",
+   "depends_on": [
+    "internal/platform/db.go",
+    "internal/orders/service.go",
+    "internal/platform/bus.go"
+   ],
+   "imported_by": 0,
+   "loc": 45
+  },
+  {
+   "n": 8,
+   "path": "internal/platform/db.go",
+   "chapter": "data",
+   "role": "data",
+   "one_liner": "Opens the single shared Postgres connection and auto-migrates every registered model across all bounded contexts.",
+   "teaches": [
+    "shared-database-per-monolith pattern",
+    "central model registry via Register()",
+    "GORM AutoMigrate on startup"
+   ],
+   "why_now": "A load-bearing file \u2014 6 files import it.",
+   "depends_on": [],
+   "imported_by": 6,
+   "loc": 24
+  },
+  {
+   "n": 9,
+   "path": "internal/catalog/model.go",
+   "chapter": "data",
+   "role": "data",
+   "one_liner": "GORM models for Category and Product entities in the catalog module, registered with the platform on init",
+   "teaches": [
+    "GORM struct tags for schema (primaryKey, uniqueIndex, foreignKey)",
+    "one-to-many relation between Category and Product",
+    "self-registration pattern via init() and platform.Register",
+    "JSON binding validation tags"
+   ],
+   "why_now": "Builds directly on what you just read \u2014 its dependencies are behind you now.",
+   "depends_on": [
+    "internal/platform/db.go"
+   ],
+   "imported_by": 0,
+   "loc": 22
+  },
+  {
+   "n": 10,
+   "path": "internal/customers/model.go",
+   "chapter": "data",
+   "role": "data",
+   "one_liner": "GORM model defining the Customer entity with fields and validation tags, auto-registered on init.",
+   "teaches": [
+    "GORM model struct tags (primaryKey, uniqueIndex, default)",
+    "JSON binding validation tags",
+    "self-registration via init() and platform.Register"
+   ],
+   "why_now": "Builds directly on what you just read \u2014 its dependencies are behind you now.",
+   "depends_on": [
+    "internal/platform/db.go"
+   ],
+   "imported_by": 0,
+   "loc": 18
+  },
+  {
+   "n": 11,
+   "path": "internal/orders/model.go",
+   "chapter": "data",
+   "role": "data",
+   "one_liner": "GORM models for orders and order lines plus the PlaceOrderRequest/LineItem API request DTOs.",
+   "teaches": [
+    "order/order-line schema with GORM tags",
+    "request DTO validation via binding tags",
+    "model self-registration via init()"
+   ],
+   "why_now": "Builds directly on what you just read \u2014 its dependencies are behind you now.",
+   "depends_on": [
+    "internal/platform/db.go"
+   ],
+   "imported_by": 0,
+   "loc": 35
+  },
+  {
+   "n": 12,
+   "path": "internal/inventory/model.go",
+   "chapter": "data",
+   "role": "data",
+   "one_liner": "GORM model for on-hand/reserved stock levels per product, mapped to legacy stock_items table.",
+   "teaches": [
+    "gorm struct tagging (primaryKey, uniqueIndex)",
+    "legacy table name pinning via TableName()",
+    "self-registration of models via init()"
+   ],
+   "why_now": "Builds directly on what you just read \u2014 its dependencies are behind you now.",
+   "depends_on": [
+    "internal/platform/db.go"
+   ],
+   "imported_by": 0,
+   "loc": 16
+  },
+  {
+   "n": 13,
+   "path": "internal/payments/model.go",
+   "chapter": "data",
+   "role": "data",
+   "one_liner": "GORM model defining the Payment entity (charge record) with a legacy bare-string status field",
+   "teaches": [
+    "GORM struct tags for primary key/index",
+    "payment status modeled as untyped string (legacy smell)",
+    "self-registration of models via init() + platform.Register"
+   ],
+   "why_now": "Builds directly on what you just read \u2014 its dependencies are behind you now.",
+   "depends_on": [
+    "internal/platform/db.go"
+   ],
+   "imported_by": 0,
+   "loc": 13
+  },
+  {
+   "n": 14,
+   "path": "internal/catalog/service.go",
+   "chapter": "logic",
+   "role": "service",
+   "one_liner": "Catalog service: lists/creates products and returns prices via a process-local in-memory cache.",
+   "teaches": [
+    "service struct wraps gorm.DB",
+    "in-memory caching with sync.RWMutex",
+    "basic input validation before DB write",
+    "shared mutable state pitfalls across instances"
+   ],
+   "why_now": "A load-bearing file \u2014 4 files import it.",
+   "depends_on": [],
+   "imported_by": 4,
+   "loc": 53
+  },
+  {
+   "n": 15,
+   "path": "internal/customers/service.go",
+   "chapter": "logic",
+   "role": "service",
+   "one_liner": "Customer service providing CRUD and status checks over the Customer model via GORM.",
+   "teaches": [
+    "service struct wraps *gorm.DB",
+    "constructor injection pattern",
+    "basic CRUD via GORM (First/Create)",
+    "deriving a status check from a loaded record"
+   ],
+   "why_now": "A load-bearing file \u2014 4 files import it.",
+   "depends_on": [],
+   "imported_by": 4,
+   "loc": 30
+  },
+  {
+   "n": 16,
+   "path": "internal/inventory/service.go",
+   "chapter": "logic",
+   "role": "service",
+   "one_liner": "Inventory service handling stock reservation, restock, and order-event reaction for the inventory context.",
+   "teaches": [
+    "read-check-then-write race condition",
+    "background ticker job pattern",
+    "event handler naming convention (OnX)",
+    "GORM query/update usage"
+   ],
+   "why_now": "A load-bearing file \u2014 3 files import it.",
+   "depends_on": [],
+   "imported_by": 3,
+   "loc": 57
+  },
+  {
+   "n": 17,
+   "path": "internal/payments/gateway.go",
+   "chapter": "logic",
+   "role": "domain",
+   "one_liner": "HTTP client wrapper that charges payments through an external payment provider's API.",
+   "teaches": [
+    "external gateway integration pattern",
+    "HTTP client with timeout config",
+    "JSON request body construction",
+    "status-code based error handling"
+   ],
+   "why_now": "Next in this chapter's dependency order.",
+   "depends_on": [],
+   "imported_by": 2,
+   "loc": 34
+  },
+  {
+   "n": 18,
+   "path": "internal/payments/service.go",
+   "chapter": "logic",
+   "role": "service",
+   "one_liner": "Payment service that orchestrates charging via the gateway and recording captured payments in the DB.",
+   "teaches": [
+    "service struct wraps db + gateway dependency",
+    "constructor injection pattern",
+    "transactional write after external gateway call"
+   ],
+   "why_now": "Builds directly on what you just read \u2014 its dependencies are behind you now.",
+   "depends_on": [
+    "internal/payments/gateway.go"
+   ],
+   "imported_by": 2,
+   "loc": 20
+  },
+  {
+   "n": 19,
+   "path": "internal/orders/service.go",
+   "chapter": "logic",
+   "role": "service",
+   "one_liner": "Order service orchestrating customers, inventory, catalog, and payments in one DB transaction (saga seam)",
+   "teaches": [
+    "cross-domain orchestration in a monolith",
+    "transactional saga boundary",
+    "event publishing after commit",
+    "service composition via constructor injection"
+   ],
+   "why_now": "Builds directly on what you just read \u2014 its dependencies are behind you now.",
+   "depends_on": [
+    "internal/customers/service.go",
+    "internal/inventory/service.go",
+    "internal/payments/service.go"
+   ],
+   "imported_by": 3,
+   "loc": 82
+  },
+  {
+   "n": 20,
+   "path": "internal/catalog/handlers.go",
+   "chapter": "api",
+   "role": "api",
+   "one_liner": "Registers and implements HTTP handlers for the catalog product listing and creation endpoints.",
+   "teaches": [
+    "gin route registration via RouterGroup",
+    "binding JSON request bodies with ShouldBindJSON",
+    "translating service errors to HTTP status codes"
+   ],
+   "why_now": "Builds directly on what you just read \u2014 its dependencies are behind you now.",
+   "depends_on": [
+    "internal/catalog/service.go"
+   ],
+   "imported_by": 1,
+   "loc": 37
+  },
+  {
+   "n": 21,
+   "path": "internal/customers/handlers.go",
+   "chapter": "api",
+   "role": "api",
+   "one_liner": "Registers Gin HTTP routes for customer get/create and handles request parsing and JSON responses",
+   "teaches": [
+    "gin route registration pattern",
+    "request param/body binding",
+    "HTTP status mapping to service errors"
+   ],
+   "why_now": "Builds directly on what you just read \u2014 its dependencies are behind you now.",
+   "depends_on": [
+    "internal/customers/service.go"
+   ],
+   "imported_by": 1,
+   "loc": 41
+  },
+  {
+   "n": 22,
+   "path": "internal/orders/handlers.go",
+   "chapter": "api",
+   "role": "api",
+   "one_liner": "Gin route handlers for placing orders and listing a customer's own orders",
+   "teaches": [
+    "HTTP route registration on a RouterGroup",
+    "binding JSON requests and mapping errors to status codes",
+    "extracting authenticated user ID from request context"
+   ],
+   "why_now": "Builds directly on what you just read \u2014 its dependencies are behind you now.",
+   "depends_on": [
+    "internal/orders/service.go",
+    "internal/platform/auth.go"
+   ],
+   "imported_by": 1,
+   "loc": 41
+  }
+ ],
+ "stats": {
+  "candidates": 21,
+  "llm_calls": 21,
+  "cache_hits": 0,
+  "fallbacks": 0
+ }
+}

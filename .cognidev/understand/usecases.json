@@ -1,0 +1,186 @@
+{
+  "domain": "E-commerce order fulfillment (single-store online shop)",
+  "summary": "This application is the backend for an online shop that lets shoppers browse a product catalog, register an account, place orders, and have those orders paid for automatically, while inventory is reserved and replenished behind the scenes. A shopper looks at what's for sale, creates an account, submits an order for one or more products, and the system takes over from there: it prices the order from the live catalog, sets aside the needed stock, and charges the shopper through a payment gateway.\n\nThe primary users are shoppers \u2014 browsing products, registering, placing orders, and reviewing their own order history \u2014 identified on each authenticated request via a bearer-style user context rather than a visible login flow. A store-operations/merchant role maintains the catalog by adding new products. Behind the scenes, placing an order fires an order-placed event that inventory and payment react to independently: inventory reserves stock for the ordered lines, and payment charges the order total through a gateway abstraction, with stock levels also topped up automatically by a background restock job so popular items don't stay unavailable.\n\nStructurally, the business is organized around five capabilities coordinating through one shared event bus and one underlying data store \u2014 a product catalog, customer accounts, order placement/history, inventory reservation and restocking, and payment charging. It reads as a single-store retail operation (one catalog, one set of customers, one order pipeline) rather than a multi-vendor marketplace.",
+  "useCases": [
+    {
+      "id": "place-order",
+      "title": "Place an order",
+      "actor": "Shopper",
+      "description": "A shopper buys one or more products in a single order; the order is priced from the live catalog, triggers a stock reservation, and is charged through payment.",
+      "steps": [
+        "Shopper submits a PlaceOrderRequest with the desired product line items via POST to the orders endpoint",
+        "Order service looks up each product's current price from the catalog (PriceOf)",
+        "Order and its order lines are recorded and an order-placed event is published on the shared bus",
+        "Inventory's order-placed handler reserves stock for each ordered line",
+        "Payment service charges the shopper for the order total via the gateway"
+      ],
+      "evidence": "orders.PlaceOrder; PlaceOrderRequest/LineItem in orders/model.go; bus.Publish/Subscribe; catalog.PriceOf; inventory.OnOrderPlaced",
+      "files": [
+        "internal/orders/handlers.go",
+        "internal/orders/service.go",
+        "internal/orders/model.go",
+        "internal/platform/bus.go"
+      ],
+      "folders": [
+        "internal/orders",
+        "internal/platform"
+      ]
+    },
+    {
+      "id": "pay-for-order",
+      "title": "Pay for an order",
+      "actor": "Shopper",
+      "description": "The shopper's order total is automatically charged through a payment gateway as part of placing the order, completing the purchase.",
+      "steps": [
+        "Order placement triggers a charge request for the order total",
+        "Payment service forwards the charge to the payment gateway (Gateway.Charge)",
+        "Payment outcome is recorded as a Payment tied to the order"
+      ],
+      "evidence": "payments.Charge (service), gateway.Charge, gateway.NewGateway; Payment model",
+      "files": [
+        "internal/payments/gateway.go",
+        "internal/payments/service.go",
+        "internal/payments/model.go"
+      ],
+      "folders": [
+        "internal/payments"
+      ]
+    },
+    {
+      "id": "reserve-stock-on-order",
+      "title": "Have stock reserved automatically when an order is placed",
+      "actor": "Shopper",
+      "description": "When a shopper places an order, the requested quantities are automatically set aside from inventory so the order can be fulfilled without being oversold.",
+      "steps": [
+        "Inventory subscribes to order-placed events on the shared bus",
+        "When an order is placed, inventory's OnOrderPlaced handler runs",
+        "Inventory reserves the ordered quantity of each product (Reserve) against the StockItem records"
+      ],
+      "evidence": "inventory.OnOrderPlaced, inventory.Reserve, StockItem model; bus.Subscribe",
+      "files": [
+        "internal/inventory/model.go",
+        "internal/inventory/service.go",
+        "internal/platform/bus.go"
+      ],
+      "folders": [
+        "internal/inventory",
+        "internal/platform"
+      ]
+    },
+    {
+      "id": "browse-products",
+      "title": "Browse available products",
+      "actor": "Shopper",
+      "description": "A shopper views the current product catalog with pricing before deciding what to buy.",
+      "steps": [
+        "Shopper requests the product listing via GET on the products endpoint",
+        "Catalog service returns the available products (List) with current prices and categories"
+      ],
+      "evidence": "catalog.List; listProducts handler; Product/Category model",
+      "files": [
+        "internal/catalog/handlers.go",
+        "internal/catalog/service.go",
+        "internal/catalog/model.go"
+      ],
+      "folders": [
+        "internal/catalog"
+      ]
+    },
+    {
+      "id": "view-order-history",
+      "title": "View my order history",
+      "actor": "Shopper",
+      "description": "An authenticated customer reviews the orders they've previously placed.",
+      "steps": [
+        "Customer requests their order history via the 'my orders' endpoint",
+        "Auth middleware resolves the requesting customer's identity from the request context (UserID)",
+        "Order service returns all orders tied to that customer (ForCustomer)"
+      ],
+      "evidence": "orders.ForCustomer; myOrders handler; AuthMiddleware/UserID in platform/auth.go",
+      "files": [
+        "internal/orders/handlers.go",
+        "internal/orders/service.go",
+        "internal/platform/auth.go"
+      ],
+      "folders": [
+        "internal/orders",
+        "internal/platform"
+      ]
+    },
+    {
+      "id": "register-account",
+      "title": "Register a customer account",
+      "actor": "Shopper",
+      "description": "A new shopper creates an account so they can place orders and be identified on future requests.",
+      "steps": [
+        "Shopper submits registration details via POST on the customers endpoint",
+        "Customer service creates and stores the new account (Register)"
+      ],
+      "evidence": "customers.Register; registerCustomer handler; Customer model",
+      "files": [
+        "internal/customers/handlers.go",
+        "internal/customers/service.go",
+        "internal/customers/model.go"
+      ],
+      "folders": [
+        "internal/customers"
+      ]
+    },
+    {
+      "id": "lookup-account",
+      "title": "Look up a customer's account details",
+      "actor": "Account holder",
+      "description": "An account holder retrieves their stored account details by ID.",
+      "steps": [
+        "Account holder requests account details via GET on the customer endpoint by ID",
+        "Customer service returns the account record (Get)"
+      ],
+      "evidence": "customers.Get; getCustomer handler",
+      "files": [
+        "internal/customers/handlers.go",
+        "internal/customers/service.go",
+        "internal/customers/model.go"
+      ],
+      "folders": [
+        "internal/customers"
+      ]
+    },
+    {
+      "id": "add-product",
+      "title": "Add a new product to the catalog",
+      "actor": "Merchant",
+      "description": "A store operator adds a new product listing with a price and category to the catalog for shoppers to buy.",
+      "steps": [
+        "Merchant submits new product details (including price and category) via POST on the products endpoint",
+        "Catalog service creates and stores the new product record (Create)"
+      ],
+      "evidence": "catalog.Create; createProduct handler; Product/Category model",
+      "files": [
+        "internal/catalog/handlers.go",
+        "internal/catalog/service.go",
+        "internal/catalog/model.go"
+      ],
+      "folders": [
+        "internal/catalog"
+      ]
+    },
+    {
+      "id": "auto-restock",
+      "title": "Have out-of-stock items automatically replenished",
+      "actor": "Merchant",
+      "description": "The store keeps products available by automatically replenishing stock on a recurring schedule, without manual reordering.",
+      "steps": [
+        "A background restock job starts and runs on a recurring interval (StartRestockJob)",
+        "Each run replenishes StockItem quantities that have fallen low (Restock)"
+      ],
+      "evidence": "inventory.Restock, inventory.StartRestockJob; StockItem model",
+      "files": [
+        "internal/inventory/model.go",
+        "internal/inventory/service.go"
+      ],
+      "folders": [
+        "internal/inventory"
+      ]
+    }
+  ]
+}

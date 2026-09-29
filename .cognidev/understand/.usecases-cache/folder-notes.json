@@ -1,0 +1,114 @@
+{
+  "internal/orders": {
+    "hash": "d742e2c49a86a0f9",
+    "purpose": "Handles order placement and order history for customers, coordinating catalog pricing and inventory reservation.",
+    "useCases": [
+      {
+        "title": "Place an order",
+        "evidence": "PlaceOrder, PlaceOrderRequest, placeOrder handler"
+      },
+      {
+        "title": "View my order history",
+        "evidence": "ForCustomer, myOrders handler"
+      }
+    ],
+    "files": [
+      "internal/orders/handlers.go",
+      "internal/orders/model.go",
+      "internal/orders/service.go"
+    ]
+  },
+  "internal/catalog": {
+    "hash": "3b9dd1cf7ba1b9a5",
+    "purpose": "Manages the product catalog, including categories, listings, and pricing.",
+    "useCases": [
+      {
+        "title": "Browse available products",
+        "evidence": "List, listProducts handler"
+      },
+      {
+        "title": "Add a new product to the catalog",
+        "evidence": "Create, createProduct handler"
+      },
+      {
+        "title": "See a product's current price",
+        "evidence": "PriceOf"
+      }
+    ],
+    "files": [
+      "internal/catalog/handlers.go",
+      "internal/catalog/model.go",
+      "internal/catalog/service.go"
+    ]
+  },
+  "internal/platform": {
+    "hash": "1d4c95d9a489ddc3",
+    "purpose": "Shared cross-cutting infrastructure (authentication, event bus, database access) used by the other modules.",
+    "useCases": [],
+    "files": [
+      "internal/platform/auth.go",
+      "internal/platform/bus.go",
+      "internal/platform/db.go"
+    ]
+  },
+  "internal/customers": {
+    "hash": "04edcc270b0fa2d2",
+    "purpose": "Manages customer account registration and lookup.",
+    "useCases": [
+      {
+        "title": "Register a customer account",
+        "evidence": "Register, registerCustomer handler"
+      },
+      {
+        "title": "Look up a customer's account details",
+        "evidence": "Get, getCustomer handler"
+      }
+    ],
+    "files": [
+      "internal/customers/handlers.go",
+      "internal/customers/model.go",
+      "internal/customers/service.go"
+    ]
+  },
+  "internal/inventory": {
+    "hash": "f3e4f41f0c26cfab",
+    "purpose": "Tracks stock levels for products, reserving stock on orders and replenishing it via background restocking.",
+    "useCases": [
+      {
+        "title": "Have stock reserved automatically when an order is placed",
+        "evidence": "OnOrderPlaced, Reserve"
+      },
+      {
+        "title": "Have out-of-stock items automatically replenished",
+        "evidence": "Restock, StartRestockJob"
+      }
+    ],
+    "files": [
+      "internal/inventory/model.go",
+      "internal/inventory/service.go"
+    ]
+  },
+  "internal/payments": {
+    "hash": "c4fa5d0eba17e399",
+    "purpose": "Processes payment charges for orders via a payment gateway.",
+    "useCases": [
+      {
+        "title": "Pay for an order",
+        "evidence": "Charge, Payment, Gateway"
+      }
+    ],
+    "files": [
+      "internal/payments/gateway.go",
+      "internal/payments/model.go",
+      "internal/payments/service.go"
+    ]
+  },
+  "cmd/shop": {
+    "hash": "03bb5ba6c774dfc4",
+    "purpose": "Application entry point that boots the shop monolith (server startup/wiring).",
+    "useCases": [],
+    "files": [
+      "cmd/shop/main.go"
+    ]
+  }
+}
